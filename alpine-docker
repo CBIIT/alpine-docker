@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "nrizk83/ubuntu-base-image"
+    registry = "nrizk83/alpine-base-image"
     registryCredential = 'docker-hub'
     dockerImage = ''
   }
@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/nci-snow-cicd/ubuntu.git'
+        git 'https://github.com/nci-snow-cicd/alpine.git'
       }
     }
     stage('Building image') {
@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Run docker image') {
       steps{
-        sh "docker run -id --name UbuntuBaseOS_18_0_4 $registry:$BUILD_NUMBER /bin/bash"
+        sh "docker run -id --name AlpineBaseOS_13_2 $registry:$BUILD_NUMBER /bin/bash"
       }
     }
     stage('Deploy Image') {
